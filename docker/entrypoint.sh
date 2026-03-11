@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Copy .env
 if [ ! -f .env ]; then
@@ -12,7 +13,12 @@ composer install --no-interaction --prefer-dist --optimize-autoloader
 php artisan key:generate --no-interaction
 
 # Wait MySQL startup
-sleep 10
+echo "Waiting for MySQL..."
+until php artisan db:show > /dev/null 2>&1; do
+  echo "MySQL is still booting up..."
+  sleep 2
+done
+echo "MySQL is up - executing migrations"
 
 # Run migrations
 php artisan migrate --force
