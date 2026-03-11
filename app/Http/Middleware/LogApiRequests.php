@@ -33,7 +33,7 @@ class LogApiRequests
             'status_code' => $response->getStatusCode(),
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
-            'duration_ms' => (microtime(true) - LARAVEL_START) * 1000,
+            'duration_ms' => defined('LARAVEL_START') ? (microtime(true) - LARAVEL_START) * 1000 : 0,
             'created_at' => now(),
         ]);
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('log_api_requests', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('owner_uuid')->index();
+            $table->uuid('owner_uuid')->nullable()->index();
             $table->string('method', 10);
             $table->string('path');
             $table->json('payload')->nullable();

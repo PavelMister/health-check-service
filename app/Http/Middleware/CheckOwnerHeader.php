@@ -22,7 +22,7 @@ class CheckOwnerHeader
             return response()->json([
                 'status' => false,
                 'message' => 'Invalid X-Owner request header',
-            ]);
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
         return $next($request);
