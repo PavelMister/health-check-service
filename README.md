@@ -6,8 +6,7 @@ A robust, Dockerized Laravel API demonstrating health check monitoring, rate lim
 
 1. Clone the repository:
    ```bash
-   git clone <repo_url>
-   cd <repository_folder>
+   git clone https://github.com/PavelMister/health-check-service .
    ```
 2. Start the infrastructure:
    ```bash
