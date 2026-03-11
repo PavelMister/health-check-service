@@ -130,9 +130,8 @@ return [
         'health' => [
             'driver' => 'single',
             'path' => storage_path('logs/health.log'),
-            'level' => 'debug'
-        ]
-
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];

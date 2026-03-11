@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Log;
+use App\Http\Middleware\CheckOwnerHeader;
+use App\Http\Middleware\LogApiRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Log;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,19 +16,19 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api(prepend: [
-            \App\Http\Middleware\CheckOwnerHeader::class,
-            \App\Http\Middleware\LogApiRequests::class
+            CheckOwnerHeader::class,
+            LogApiRequests::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (\RedisException $e, $request) {
-            Log::channel('health')->error("Redis unavailable");
+        $exceptions->render(function (RedisException $e, $request) {
+            Log::channel('health')->error('Redis unavailable');
 
             if ($request->is('api/*')) {
                 return response()->json([
                     'db' => true,
                     'cache' => false,
-                    'message' => 'Redis connection established',
+                    'message' => 'Redis unavailable',
                 ], 500);
             }
         });

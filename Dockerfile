@@ -9,13 +9,14 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    supervisor
+    supervisor \
+    libicu-dev
 
 # Clean cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Intall PHP extensions (for MySQL)
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
 
 # Added extension for Redis
 RUN pecl install redis && docker-php-ext-enable redis
