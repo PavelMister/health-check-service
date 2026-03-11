@@ -24,7 +24,7 @@ A robust, Dockerized Laravel API demonstrating health check monitoring, rate lim
 - **Logging**: Every API request is logged to the `log_api_requests` database table via a dedicated Middleware. System errors are logged via standard Laravel Logger channels.
 - **Code Quality**: Enforced strict typing (`declare(strict_types=1);`) and utilized Dependency Injection across Controllers and Middleware.
 
-## 🧪 Testing
+## Testing
 
 ### Automated Tests (PHPUnit)
 Run the feature tests inside the application container to verify the core logic:
@@ -44,7 +44,7 @@ docker compose exec app php artisan test
   ```
 - **Throttle Test**: Send 61+ requests within a minute using Postman Runner to observe the `429 Too Many Requests` response.
 
-## 🛡️ Security Considerations & Future Improvements
+## Security Considerations & Future Improvements
 
 In the context of this assignment, the rate limiter is bound directly to the `X-Owner` header. Since the system currently accepts any structurally valid UUID, it is theoretically vulnerable to rate-limit bypassing if a malicious client generates a new UUID for every request.
 
