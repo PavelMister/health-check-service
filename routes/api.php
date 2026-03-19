@@ -1,11 +1,7 @@
 <?php
 
-use App\Http\Controllers\V1\HealthController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('throttle:v1_limits')->group(function () {
-    // V1 version
-    Route::prefix('v1')->group(function () {
-        Route::get('health-check', [HealthController::class, 'checkHealth']);
-    });
-});
+Route::middleware('throttle:v1_limits')
+    ->prefix('v1')
+    ->group(base_path('routes/api/v1.php'));

@@ -26,7 +26,7 @@ class LogApiRequests
     {
         DB::table('log_api_requests')->insert([
             'id' => (string) Str::uuid(),
-            'owner_uuid' => $request->header('X-Owner'),
+            'owner_uuid' => $request->header('X-Owner', 'anonymous'),
             'method' => $request->method(),
             'path' => $request->path(),
             'payload' => json_encode($request->all()),
