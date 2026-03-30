@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\V1;
 
+use App\Http\Requests\Users\LoginRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -21,14 +22,14 @@ class UsersController extends Controller
      */
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = $this->userService->addUser($request);
+        $user = $this->userService->register($request->validated());
 
         return $this->success($user, __('auth.registered'));
     }
 
-    public function login(RegisterRequest $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        $user = $this->userService->addUser($request);
+        $user = $this->userService->authenticate($request->validated());
 
         return $this->success($user, __('auth.authenticated'));
     }

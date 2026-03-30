@@ -24,6 +24,10 @@ RUN pecl install redis && docker-php-ext-enable redis
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Install nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
 WORKDIR /var/www
 
 # Copy project files

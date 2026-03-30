@@ -167,6 +167,10 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+    'recaptcha' => [
+        'invalid' => 'The reCAPTCHA field is invalid.',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
